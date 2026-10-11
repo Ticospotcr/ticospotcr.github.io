@@ -245,8 +245,8 @@ const $=id=>document.getElementById(id);
 const DEMO=!FIREBASE_CONFIG.projectId;
 const ADMINS=['adminanunciatecr@gmail.com']; /* escribe aquí tu correo entre comillas, ej. ['tucorreo@gmail.com'], para ver los botones de Destacar y Verificar */
 const ADMIN_WA='50686214324'; /* tu WhatsApp con código, ej. '50688888888', para el botón "Tu negocio aquí" */
-const LIM={seg:15,mb:30,dias:7};
-const VERSION='2026-10-14.1'; /* súbela cada vez que publiques cambios importantes; ver panel de administración */
+const LIM={seg:15,mb:60,dias:7}; /* mb = tope de seguridad; Cloudinary comprime al subir */
+const VERSION='2026-10-15.1'; /* súbela cada vez que publiques cambios importantes; ver panel de administración */
 let vchk=false; /* límites: segundos por video, MB por video, días que dura una publicación */
 const cloudUp=(f,onp)=>new Promise((res,rej)=>{const x=new XMLHttpRequest(),d=new FormData();d.append('file',f);d.append('upload_preset',CLOUD.preset);
  x.open('POST',`https://api.cloudinary.com/v1_1/${CLOUD.cloud}/video/upload`);
@@ -338,7 +338,7 @@ function navr(){
 const postCard=p=>{const b=bz(p.bid);if(!b)return'';
  const m=p.video?`<div class="pm vid" onclick="dbl(event,'${p.id}',()=>openShorts('${p.id}'))"><video class="fv" src="${safeVid(p.video)}" poster="${thumbOf(p)}" muted loop playsinline preload="none"></video><div class="play">▶ Short</div></div>`:p.img?`<div class="mw" onclick="dbl(event,'${p.id}')"><img class="pm" src="${safeImg(p.img)}" alt="" loading="lazy" decoding="async"></div>`:'';
  const own=!!(me&&b.owner==me.uid),sv=myFollow.includes(b.id);
- return`<div class="pc"><div class="ph" onclick="go('negocio','${b.id}')"><div class="av sm">${avt(b)}</div><div style="flex:1;min-width:0"><b>${esc(b.name)}</b><div class="mu">${esc(b.cat)} · ${ago(p.ts)} · ${I('star')} ${starsS(b)}<br>${I('pin')} ${esc(shortLoc(b.loc))}</div></div>${own?`<button class="fbn del" aria-label="Eliminar publicación" onclick="delPost(event,'${p.id}')">${I('trash')}</button>`:`<button class="fbn ${sv?'on':''}" data-f="${b.id}" onclick="folPost(event,'${b.id}')">${sv?'Siguiendo':'Seguir'}</button>`}</div>${m}<div class="pt">${esc(p.text)}</div>${reactBar(p)}</div>`};
+ return`<div class="pc"><div class="ph" onclick="go('negocio','${b.id}')"><div class="av sm">${avt(b)}</div><div style="flex:1;min-width:0"><b>${esc(b.name)}</b><div class="mu">${esc(b.cat)} · ${ago(p.ts)} · ${I('star')} ${starsS(b)}<br>${I('pin')} ${esc(shortLoc(b.loc))}</div></div>${own?`<button class="fbn del" aria-label="Eliminar publicación" onclick="delPost(event,'${p.id}')">${I('trash')}</button>`:`<button class="fbn ${sv?'on':''}" data-f="${b.id}" onclick="folPost(event,'${b.id}')">${sv?'Siguiendo':'Seguir'}</button>`}</div>${m}<div class="pt">${esc(p.text)}</div>${p.vlink&&vlinkOk(p.vlink)?`<div style="padding:0 14px 8px"><a class="sp" target="_blank" rel="noopener" href="${esc(p.vlink)}">▶ Ver video</a></div>`:''}${reactBar(p)}</div>`};
 const bizCard=b=>{const o=openNow(b.hours),h=esc(b.hours||''),sv=myFollow.includes(b.id);return`<div class="bc"><div class="av" onclick="go('negocio','${b.id}')">${avt(b)}</div><div class="info" onclick="go('negocio','${b.id}')"><b>${esc(b.name)}${b.verified?' <span class="vf">✓</span>':''}${isFeat(b)?'<span class="bdg">Destacado</span>':''}</b><div class="mu">${esc(b.cat)} • ${esc(b.loc)}</div><div class="mu">${o===null?h:`<b class="${o?'ok':'cl'}">${o?'Abierto':'Cerrado'}</b> • ${h}`}</div><div class="mu"><span style="color:#f5a300">★</span> <b style="color:var(--tx)">${stars(b)}</b></div></div><div style="display:flex;flex-direction:column;gap:8px;align-items:center"><button class="hrt ${sv?'on':''}" onclick="fol('${b.id}')">${sv?'♥':'♡'}</button><button class="go" onclick="go('negocio','${b.id}')">›</button></div></div>`};
 
 function bizView(b,own){
@@ -353,13 +353,13 @@ function bizView(b,own){
  const socs=(b.fb||b.ig)?`<div class="socs">${b.fb?`<a class="sp fb" target="_blank" rel="noopener" href="${esc(fbUrl(b.fb))}">${SFB} Facebook</a>`:''}${b.ig?`<a class="sp ig" target="_blank" rel="noopener" href="${esc(igUrl(b.ig))}">${SIG} Instagram</a>`:''}</div>`:'';
  const edit=own&&editing?`<div class="card" style="margin-top:12px"><b>Editar mi negocio</b><input id="e_n" value="${esc(b.name)}" placeholder="Nombre del negocio" style="margin-top:8px"><select id="e_c">${CATS.map(c=>`<option ${c[1]==b.cat?'selected':''}>${c[1]}</option>`).join('')}</select><textarea id="e_d" rows="3" placeholder="Descripción">${esc(b.desc||'')}</textarea><input id="e_l" value="${esc(b.loc||'')}" placeholder="Ubicación: Cantón, Distrito y señas"><input id="e_m" value="${esc(b.maps||'')}" placeholder="Enlace de Google Maps (opcional)" inputmode="url"><input id="e_h" value="${esc(b.hours||'')}" placeholder="Horario (ej. 8:00 a.m. - 7:00 p.m.)"><input id="e_w" value="${esc(b.wa||'')}" placeholder="WhatsApp con código (50688888888)"><input id="e_fb" value="${esc(b.fb||'')}" placeholder="Facebook (enlace o nombre)"><input id="e_ig" value="${esc(b.ig||'')}" placeholder="Instagram (@usuario)"><div class="acts"><button class="btn" id="e_ok">Guardar cambios</button><button class="btn o" onclick="setEdit(false)">Cancelar</button></div></div>`:'';
  return`<div style="display:flex;gap:14px;align-items:center;margin-top:14px"><div class="av">${avt(b)}</div><div><h1 style="margin:0;font-size:24px">${esc(b.name)}${b.verified?'<span class="vf">✔</span>':''}</h1><div class="mu">${esc(b.cat)} · ★ ${stars(b)} · ${I('users')} ${b.followers||0} seguidores</div></div></div>
- <p>${esc(b.desc)}</p><div class="mu">${I('pin')} ${esc(b.loc)}<br>${I('clock')} ${esc(b.hours||'—')}</div>${edit}${own?`<div class="card" style="margin-top:12px"><b>Resultados · últimos 7 días</b><div class="stats" id="stats"><div><b>…</b><small>Visitas al perfil</small></div><div><b>…</b><small>Toques a WhatsApp</small></div><div><b>${b.followers||0}</b><small>Seguidores</small></div><div><b>${posts.filter(p=>p.bid==b.id).length}</b><small>Publicaciones activas</small></div></div><p class="mu" style="margin:8px 0 0">${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'¿Quieres más clientes? Pide que destaquen tu negocio.'}</p></div>`:''}${isAdmin()?adminH(b):''}
+ <p>${esc(b.desc)}</p><div class="mu">${I('pin')} ${esc(b.loc)}<br>${I('clock')} ${esc(b.hours||'—')}</div>${edit}${own?`<div class="card" style="margin-top:12px"><b>Resultados · últimos 7 días</b><div class="stats" id="stats"><div><b>…</b><small>Visitas al perfil</small></div><div><b>…</b><small>Toques a WhatsApp</small></div><div><b>${b.followers||0}</b><small>Seguidores</small></div><div><b>${posts.filter(p=>p.bid==b.id).length}</b><small>Publicaciones activas</small></div></div><p id="pu" class="mu" style="margin:10px 0 0"><b>Tu plan: ${PLANES[planOf(b)].n}</b></p><p class="mu" style="margin:4px 0 8px">${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'¿Quieres más clientes? Destaca tu negocio.'}</p><div class="acts"><button class="btn o" onclick="go('planes')">Ver planes</button><button class="btn" onclick="go('destacar')">Destacar mi negocio</button></div></div>`:''}${isAdmin()?adminH(b):''}
  <div class="acts2">${acts}</div>${socs}
  <div class="ptabs">${tab('cal','⭐','Calificación')}${tab('res','📝','Reseñas')}${tab('pub','📦','Publicaciones')}${!own&&b.wa?`<a class="ptab wa" target="_blank" rel="noopener" onclick="track('wa','${b.id}')" href="${waLink(b,`Hola ${b.name}, vi su perfil en AnunciateCR y quisiera más información.`)}">${WA_SVG} Contactar</a>`:''}</div>
  <div style="margin-top:10px">${body}</div>`}
 function bizWire(b,own){
  loadR(b.id);if(!own)trackView(b);
- if(own){loadStats(b.id);const ph=$('ph');if(ph)ph.onchange=async e=>{const f=e.target.files[0];if(!f)return;await db.upd('businesses',b.id,{photo:await shrink(f,320)});await load();render()};
+ if(own){loadStats(b.id);fillPlan(b);const ph=$('ph');if(ph)ph.onchange=async e=>{const f=e.target.files[0];if(!f)return;await db.upd('businesses',b.id,{photo:await shrink(f,320)});await load();render()};
   const ok=$('e_ok');if(ok)ok.onclick=async()=>{const n=$('e_n').value.trim();if(!n)return alert('Falta el nombre');
    const em=$('e_m').value.trim();if(em&&!mapsOk(em))return alert('El enlace debe ser de Google Maps (ej. https://maps.app.goo.gl/...)');
    await db.upd('businesses',b.id,{name:n,cat:$('e_c').value,desc:$('e_d').value,loc:$('e_l').value.trim(),maps:em,hours:$('e_h').value.trim(),wa:$('e_w').value.replace(/\D/g,''),fb:$('e_fb').value.trim(),ig:$('e_ig').value.trim()});
@@ -435,11 +435,32 @@ function render0(){
   $('eye').onclick=()=>{const p=$('pw'),h=p.type=='password';p.type=h?'text':'password';$('eye').innerHTML=I(h?'eyeoff':'eye');$('eye').setAttribute('aria-label',h?'Ocultar contraseña':'Mostrar contraseña')};
   $('fg').onclick=async()=>{const em=$('em').value.replace(/\s/g,'').toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(em)){$('er').textContent='Escribe tu correo arriba y vuelve a tocar "¿Olvidaste tu contraseña?"';return}try{await auth.reset(em);$('er').textContent='Te enviamos un correo para restablecer tu contraseña. Revisa también el spam.'}catch(e){$('er').textContent=MSG[e.code]||e.message}};
  }
+
+ else if(view=='planes'){
+  const card=(k,price,per,feat,btn,dark)=>{const P=PLANES[k];return`<div class="card" style="margin-top:12px;${dark?'background:#14306B;color:#fff':''}"><div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:18px">${P.n}</b><div><b style="font-size:22px">${price}</b><span style="font-size:12px;opacity:.75">${per}</span></div></div><div style="font-size:14px;line-height:1.8;margin:10px 0 12px">${feat.join('<br>')}<br><b>${P.fotos} fotos y ${P.videos} ${P.videos==1?'video':'videos'} al mes</b> (hasta ${LIM.seg} s)<br>Enlaces de video de YouTube, Facebook o TikTok</div>${btn}</div>`};
+  A.innerHTML=`<h1>Planes para tu negocio</h1><p class="s">Empieza gratis. Pasa a Destacado cuando quieras más clientes.</p>
+  <div class="msg" style="background:#FDEBDD;color:#7C2D12"><b>Plan Fundadores · 100 cupos</b><br>Básico gratis 3 meses, 30 días de destacado e insignia "Fundador". Escríbenos para reservar tu cupo.</div>
+  ${card('free','₡0','',['Perfil de tu negocio','Seguidores y reseñas'],`<button class="btn o" style="width:100%" onclick="go('publicar')">Empezar gratis</button>`)}
+  ${card('basic',PRECIOS.basico,' /mes',['Todo lo del plan Gratis','Sello de verificado'],`<button class="btn" style="width:100%" onclick="askPlan('quiero el plan Básico en AnunciateCR')">Elegir Básico</button>`)}
+  ${card('featured',PRECIOS.destacado30,' /mes',['Todo lo del plan Básico','Carrusel de Destacados en el inicio','Prioridad en tu zona','Etiqueta "Destacado" en tu perfil'],`<button class="btn" style="width:100%;background:#D9480F" onclick="go('destacar')">Destacar mi negocio</button>`,true)}
+  <p class="mu" style="text-align:center;margin-top:12px">Pago por SINPE Móvil. Confirmamos por WhatsApp.</p>`;
+ }
+ else if(view=='destacar'){
+  const opt=(k,t,sub,price,per,tag)=>`<button class="card" onclick="setDest('${k}')" style="display:flex;width:100%;justify-content:space-between;align-items:center;text-align:left;margin-top:14px;position:relative;cursor:pointer;font:inherit;color:inherit;${destSel==k?'border:2px solid #D9480F':''}">${tag?`<span style="position:absolute;top:-11px;left:14px;background:${tag[1]};color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:11px">${tag[0]}</span>`:''}<span><b style="font-size:16px">${t}</b><br><span class="mu" style="font-size:12px">${sub}</span></span><span style="text-align:right"><b style="font-size:20px">${price}</b><br><span class="mu" style="font-size:11px">${per}</span></span></button>`;
+  const names={'fin':'Fin de semana','7':'7 días','30':'30 días'};
+  A.innerHTML=`<h1>Destaca tu negocio</h1><p class="s">Aparece primero en el inicio y llega a más clientes de tu zona.</p>
+  ${opt('fin','Fin de semana','Termina el '+fmtDay(weekendEnd()),PRECIOS.destacado2,'≈ ₡830 por día')}
+  ${opt('7','7 días','Desde que se aprueba el pago',PRECIOS.destacado7,'₡500 por día',['Recomendado','#D9480F'])}
+  ${opt('30','30 días','Un mes completo de exposición',PRECIOS.destacado30,'≈ ₡330 por día',['Mejor precio','#14306B'])}
+  <div class="card" style="margin-top:14px;font-size:13px;line-height:1.8"><b>Todas incluyen</b><br>Carrusel de Destacados en el inicio<br>Etiqueta "Destacado" en tu perfil<br>Prioridad en tu zona<br>Se apaga solo al terminar</div>
+  <button class="btn" style="width:100%;margin-top:14px;background:#D9480F" onclick="askPlan('quiero destacar mi negocio en AnunciateCR: ${names[destSel]}')">Pedir por WhatsApp</button>
+  <p class="mu" style="text-align:center;margin-top:10px">Pago por SINPE Móvil. Confirmamos por WhatsApp.</p>`;
+ }
  else if(view=='publicar'){
   if(!me){A.innerHTML=`<h1>Publicar</h1><p class="s">Inicia sesión para registrar tu negocio.</p><button class="btn" onclick="go('perfil')">Iniciar sesión</button>`;return}
   const mine=allBiz.find(b=>b.owner==me.uid);
   if(!mine){
-   A.innerHTML=`<h1>Registra tu negocio</h1><p class="s">Revisamos cada solicitud antes de publicarla. Completa bien tus datos y agrega foto y redes.</p>
+   A.innerHTML=`<h1>Registra tu negocio</h1><p class="s">Revisamos cada solicitud antes de publicarla. Completa bien tus datos y agrega foto y redes. <a onclick="go('planes')" style="color:var(--or);font-weight:700;cursor:pointer">Ver planes y precios</a></p>
    <div style="display:flex;align-items:center;gap:14px;margin:12px 0"><div id="rp" class="av" style="width:84px;height:84px;flex:none"><span class="ini">📷</span></div><div><label class="btn o" style="display:inline-flex;cursor:pointer">${I('camera')} Subir foto o logo<input id="rf" type="file" accept="image/*" hidden></label><p class="mu" style="margin:6px 0 0;font-size:12px">Se verá en tu perfil y en Destacados.</p></div></div>
    <input id="n" placeholder="Nombre del negocio"><select id="c">${CATS.map(c=>`<option>${c[1]}</option>`).join('')}</select>
    <textarea id="d" rows="3" placeholder="Descripción"></textarea>
@@ -453,17 +474,23 @@ function render0(){
     try{await db.add('businesses',{name:n,cat:$('c').value,desc:$('d').value,loc:$('l').value,maps:gm,photo:regPhoto,hours:$('h').value,wa:$('w').value.replace(/\D/g,''),fb:$('fbk').value.trim(),ig:$('igr').value.trim(),rating:0,followers:0,created:Date.now(),submitted:Date.now(),status:'pending',owner:me.uid,email:me.email||''});notifyAdmin({name:n,cat:$('c').value,desc:$('d').value,loc:$('l').value,maps:gm,hours:$('h').value,wa:$('w').value.replace(/\D/g,''),fb:$('fbk').value.trim(),ig:$('igr').value.trim(),email:me.email||''});await load();render()}catch(e){alert('No se pudo enviar: '+e.message);sv.disabled=false;sv.textContent='Crear negocio'}};
   }else if(stOf(mine)!='approved'){A.innerHTML=statusH(mine)
   }else{
-   A.innerHTML=`<h1>Publicar como ${esc(mine.name)}</h1><p class="s">Comparte un estado u oferta con tus seguidores.</p>
-   <textarea id="t" rows="3" placeholder="Ej: Cambio de aceite desde ₡15.000 🔧"></textarea><label class="mu">Foto (opcional)</label><input id="i" type="file" accept="image/*"><label class="mu">Video corto (opcional, máx. ${LIM.seg} s · ${LIM.mb} MB)</label><input id="v" type="file" accept="video/*"><label class="mu" style="display:flex;align-items:center;gap:8px;margin:8px 0"><input type="checkbox" id="ofr" style="width:auto;margin:0">Marcar como oferta de hoy (sale con la insignia "Oferta hoy")</label><button class="btn" id="pb">Publicar</button>`;
+   A.innerHTML=`<h1>Publicar como ${esc(mine.name)}</h1><p class="s">Comparte un estado u oferta con tus seguidores.</p><p id="pu" class="mu" style="margin:0 0 8px"></p>
+   <textarea id="t" rows="3" placeholder="Ej: Cambio de aceite desde ₡15.000 🔧"></textarea><label class="mu">Foto (opcional)</label><input id="i" type="file" accept="image/*"><label class="mu">Video corto (opcional, hasta ${LIM.seg} segundos)</label><input id="v" type="file" accept="video/*"><p class="mu" style="margin:-4px 0 8px;font-size:12px">Graba en vertical, de ${LIM.seg} segundos o menos.</p><label class="mu">O pega el enlace de un video (YouTube, Facebook, Instagram o TikTok)</label><input id="vl" placeholder="https://..." inputmode="url"><label class="mu" style="display:flex;align-items:center;gap:8px;margin:8px 0"><input type="checkbox" id="ofr" style="width:auto;margin:0">Marcar como oferta de hoy (sale con la insignia "Oferta hoy")</label><button class="btn" id="pb">Publicar</button>`;
+   fillPlan(mine);
    $('pb').onclick=async()=>{const t=$('t').value.trim();if(!t)return alert('Escribe algo');
-    const btn=$('pb'),vf=$('v').files[0];
+    const btn=$('pb'),vf=$('v').files[0],imF=$('i').files[0],vl=($('vl').value||'').trim();
+    if(vl&&!vlinkOk(vl))return alert('El enlace de video debe ser de YouTube, Facebook, Instagram o TikTok.');
+    btn.disabled=true;btn.textContent='Revisando tu plan...';
+    const U=await usageOf(mine),PL=PLANES[planOf(mine)];btn.disabled=false;btn.textContent='Publicar';
+    if(imF&&U.fotos>=PL.fotos)return limitMsg('fotos',PL);
+    if(vf&&U.videos>=PL.videos)return limitMsg('videos',PL);
     try{btn.disabled=true;btn.textContent='Subiendo...';
-     if(vf&&vf.size>LIM.mb*1e6)throw Error(`El video pesa más de ${LIM.mb} MB`);
-     const dd=vf?await dur(vf):0;if(vf&&dd>LIM.seg+1)throw Error(`El video dura más de ${LIM.seg} segundos`);
+     if(vf&&vf.size>LIM.mb*1e6)throw Error('Tu video es muy pesado. Grábalo de hasta '+LIM.seg+' segundos en calidad HD (no 4K) y vuelve a subirlo.');
+     const dd=vf?await dur(vf):0;if(vf&&dd>LIM.seg+1)throw Error('Tu video dura más de '+LIM.seg+' segundos. Recórtalo y vuelve a subirlo.');
      const img=$('i').files[0]?await shrink($('i').files[0]):'';
      const pg=p=>btn.textContent='Subiendo '+p+'%';
      const video=vf?await (CLOUD.cloud&&CLOUD.preset?cloudUp(vf,pg):db.upload(vf,`videos/${mine.id}_${Date.now()}`,pg)):'';
-     await db.add('posts',{bid:mine.id,text:t,img,video,dur:dd,oferta:$('ofr').checked,ts:Date.now()});await load();go('perfil')
+     await db.add('posts',{bid:mine.id,text:t,img,video,vlink:vl,dur:dd,oferta:$('ofr').checked,ts:Date.now()});await load();go('perfil')
     }catch(e){alert('No se pudo publicar: '+e.message);btn.disabled=false;btn.textContent='Publicar'}};
   }
  }
@@ -531,14 +558,14 @@ const emptyH=(t,m,btn)=>`<div class="state empty">${I('store')}<b>${t}</b><p>${m
 const featCard=b=>{const fp=posts.find(p=>p.bid==b.id&&p.img),ph=safeImg((fp&&fp.img)||b.photo||''),k=CC[b.cat]||CC.Todos;
  const bd=[isFeat(b)?`<span class="bd">${I('flame')} Destacado</span>`:'',hasOffer(b)?`<span class="bd g">${I('tag')} Oferta hoy</span>`:'',isNew(b)?`<span class="bd n">${I('spark')} Nuevo</span>`:(!isFeat(b)&&rtg(b)>=4?`<span class="bd n">${I('spark')} Popular</span>`:'')].filter(Boolean).slice(0,2).join('');
  return`<div class="fc" onclick="go('negocio','${b.id}')"><div class="ph1" style="${ph?`background-image:url('${ph}')`:`background:${k[1]};color:${k[0]}`}"><div class="bds">${bd}</div>${ph?'':`<svg viewBox="0 0 24 24" class="big">${CI[b.cat]||CI.Todos}</svg>`}</div><div class="fcb"><b>${esc(b.name)}</b><small><span style="color:#f5a300">★</span> ${starsS(b)} · ${esc(shortLoc(b.loc))}</small></div></div>`};
-const adminH=b=>`<div class="card adm" style="margin-top:12px"><b>Panel de administración</b><p class="mu" style="margin:4px 0 8px">${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'No está destacado'}</p><div class="acts"><button class="btn" onclick="adm('${b.id}',7)">Destacar 7 días</button><button class="btn" onclick="adm('${b.id}',30)">30 días</button><button class="btn o" onclick="adm('${b.id}',0)">Quitar</button><button class="btn o" onclick="admV('${b.id}')">${b.verified?'Quitar verificado':'Verificar'}</button><button class="btn o" onclick="admVer()">Marcar versión actual</button></div></div>`;
+const adminH=b=>`<div class="card adm" style="margin-top:12px"><b>Panel de administración</b><p class="mu" style="margin:4px 0 8px">${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'No está destacado'} · Plan: ${PLANES[planOf(b)].n}${b.plan=='basic'&&(b.planUntil||0)>Date.now()?' hasta '+new Date(b.planUntil).toLocaleDateString('es-CR'):''}</p><div class="acts"><button class="btn" onclick="adm('${b.id}','fin')">Fin de semana</button><button class="btn" onclick="adm('${b.id}',7)">7 días</button><button class="btn" onclick="adm('${b.id}',30)">30 días</button><button class="btn o" onclick="adm('${b.id}',0)">Quitar</button><button class="btn o" onclick="admPlan('${b.id}',1)">Básico 1 mes</button><button class="btn o" onclick="admPlan('${b.id}',3)">Básico 3 meses</button><button class="btn o" onclick="admPlan('${b.id}',0)">Plan Gratis</button><button class="btn o" onclick="admV('${b.id}')">${b.verified?'Quitar verificado':'Verificar'}</button><button class="btn o" onclick="admVer()">Marcar versión actual</button></div></div>`;
 const statusH=b=>{const t=stOf(b);
  if(t=='pending')return`<div class="state empty">${I('clock')}<b>Tu solicitud está en revisión</b><p>Revisamos cada negocio antes de publicarlo. Te avisaremos por WhatsApp cuando esté aprobado.</p></div>`;
  if(t=='rejected')return`<div class="state"><b>Tu solicitud necesita cambios</b><p class="mu">${esc(b.rejectReason||'Revisa tus datos y vuelve a enviarla.')}</p><div class="acts"><button class="btn" onclick="go('perfil');setTimeout(()=>setEdit(true),60)">Editar datos</button><button class="btn o" onclick="resub('${b.id}')">Reenviar solicitud</button></div></div>`;
  return`<div class="state empty">${I('store')}<b>Tu negocio está suspendido</b><p>Escríbenos por WhatsApp para revisarlo.</p>${ADMIN_WA?`<a class="cta" style="text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/${ADMIN_WA}">Contactar a AnunciateCR</a>`:''}</div>`};
 
 /* ===== PRECIOS que se muestran en la tarjeta "Tu negocio aquí" (edítalos aquí) ===== */
-const PRECIOS={destacado7:'₡3,500',destacado30:'₡9,900'};
+const PRECIOS={destacado2:'₡2,500',destacado7:'₡3,500',destacado30:'₡9,900',basico:'₡4,900'};
 const mapsOk=u=>/^https:\/\/(www\.)?(google\.[a-z.]+\/maps|maps\.google\.[a-z.]+|maps\.app\.goo\.gl|goo\.gl\/maps)/i.test((u||'').trim());
 const mapsUrl=b=>mapsOk(b.maps)?b.maps.trim():`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((b.name||'')+' '+(b.loc||'')+' Costa Rica')}`;
 const ROT={};const rk=id=>ROT[id]??=Math.random();
@@ -546,10 +573,24 @@ const bizLink=id=>location.origin+location.pathname+'#/negocio/'+id;
 window.shareBiz=async id=>{const b=bz(id)||allBiz.find(x=>x.id==id);if(!b)return;const url=bizLink(id),text=`Mira ${b.name} en AnunciateCR`;
  try{if(navigator.share){await navigator.share({title:b.name,text,url});return}}catch(e){if(e&&e.name=='AbortError')return}
  try{await navigator.clipboard.writeText(url);alert('Enlace copiado:\n'+url)}catch(e){prompt('Copia este enlace:',url)}};
-const VIEWS=['inicio','negocio','siguiendo','perfil','publicar'];
+const VIEWS=['inicio','negocio','siguiendo','perfil','publicar','planes','destacar'];
 const hashOf=(v,a)=>v=='inicio'?'#/':v=='negocio'?'#/negocio/'+a:'#/'+v;
 const fromHash=()=>{const m=location.hash.match(/^#\/([a-z]+)(?:\/([\w-]+))?/);return m&&VIEWS.includes(m[1])?[m[1],m[2]||null]:['inicio',null]};
 {const [v0,a0]=fromHash();view=v0;arg=a0}
+
+/* ===== PLANES y límites por mes (edítalos aquí) ===== */
+const PLANES={free:{n:'Gratis',fotos:8,videos:1},basic:{n:'Básico',fotos:30,videos:6},featured:{n:'Destacado',fotos:60,videos:15}};
+const planOf=b=>isFeat(b)?'featured':((b.plan=='basic'&&(b.planUntil||0)>Date.now())?'basic':'free');
+const monthStart=()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),1).getTime()};
+const usageOf=async b=>{let L;try{L=await db.where('posts','bid',b.id)}catch(e){L=posts.filter(p=>p.bid==b.id)}const t=monthStart(),m=L.filter(p=>(p.ts||0)>=t);return{fotos:m.filter(p=>p.img).length,videos:m.filter(p=>p.video).length}};
+const limitMsg=(k,P)=>{if(confirm(`Llegaste al límite de ${P[k]} ${k} al mes de tu plan ${P.n}.${k=='videos'?'\n\nTambién puedes pegar el enlace de un video de YouTube, Facebook o TikTok sin límite.':''}\n\nCon un plan superior puedes publicar más. ¿Quieres ver los planes?`))go('planes')};
+const vlinkOk=u=>/^https:\/\/([\w-]+\.)?(youtube\.com|youtu\.be|facebook\.com|fb\.watch|tiktok\.com|instagram\.com)\//i.test((u||'').trim());
+const weekendEnd=()=>{const d=new Date(),add=(7-d.getDay())%7;return new Date(d.getFullYear(),d.getMonth(),d.getDate()+add,23,59,59,999).getTime()};
+const fmtDay=t=>new Date(t).toLocaleDateString('es-CR',{weekday:'long',day:'numeric',month:'long'});
+let destSel='7';
+window.setDest=k=>{destSel=k;render()};
+window.askPlan=txt=>{const mine=me&&allBiz.find(x=>x.owner==me.uid);const m=txt+(mine?` (negocio: ${mine.name})`:'');if(!ADMIN_WA)return alert('Escríbenos por WhatsApp para coordinar.');window.open('https://wa.me/'+ADMIN_WA+'?text='+encodeURIComponent('Hola, '+m),'_blank')};
+window.fillPlan=async b=>{const el=$('pu');if(!el)return;const P=PLANES[planOf(b)];try{const u=await usageOf(b);el.innerHTML=`<b>Tu plan: ${P.n}</b><br>Fotos este mes: ${u.fotos} de ${P.fotos} · Videos: ${u.videos} de ${P.videos}`}catch(e){el.innerHTML=`<b>Tu plan: ${P.n}</b>`}};
 const fmtD=t=>t?new Date(t).toLocaleString('es-CR',{dateStyle:'medium',timeStyle:'short'}):'—';
 const adminPanel=()=>{const pend=allBiz.filter(b=>stOf(b)=='pending'),ok=allBiz.filter(b=>stOf(b)=='approved'),oth=allBiz.filter(b=>['rejected','suspended'].includes(stOf(b)));
  const tab=admTab||(pend.length?'pend':'ok');
@@ -559,7 +600,7 @@ const adminPanel=()=>{const pend=allBiz.filter(b=>stOf(b)=='pending'),ok=allBiz.
  const req=b=>{const im=safeImg(b.photo||'');return`<div class="arow" style="display:block;padding:12px 0"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px">${im?`<img src="${im}" alt="" style="width:64px;height:64px;border-radius:12px;object-fit:cover;flex:none">`:`<div style="width:64px;height:64px;border-radius:12px;background:var(--bd);display:grid;place-items:center;flex:none;font-size:11px;color:var(--mu)">sin foto</div>`}<div style="min-width:0"><b style="font-size:15px">${esc(b.name)}</b><small>Enviado: ${fmtD(b.submitted||b.created)}</small></div></div>
   ${F('Categoría',esc(b.cat))}${F('Descripción',esc(b.desc))}${F('Dirección',esc(b.loc))}${F('Google Maps',b.maps&&mapsOk(b.maps)?`<a target="_blank" rel="noopener" href="${esc(b.maps)}">Abrir mapa</a>`:'')}${F('Horario',esc(b.hours))}${F('WhatsApp',b.wa?esc(b.wa):'')}${F('Facebook',b.fb?`<a target="_blank" rel="noopener" href="${esc(fbUrl(b.fb))}">${esc(b.fb)}</a>`:'')}${F('Instagram',b.ig?`<a target="_blank" rel="noopener" href="${esc(igUrl(b.ig))}">${esc(b.ig)}</a>`:'')}${F('Correo de la cuenta',esc(b.email))}
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="pri" onclick="apr('${b.id}')">✓ Aprobar</button><button onclick="rej('${b.id}')">Rechazar</button>${b.wa?`<a class="sp" target="_blank" rel="noopener" href="${waLink(b,`Hola ${b.name}, te escribimos de AnunciateCR sobre tu solicitud de inscripción.`)}">${WA_SVG} Escribir</a>`:''}</div></div>`};
- const row=b=>`<div class="arow"><div><b style="font-size:14px">${esc(b.name)}${b.verified?' ✓':''}</b><small>${esc(shortLoc(b.loc))} · ${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'Sin destacar'}</small></div><button class="pri" onclick="adm('${b.id}',7)">7 días</button><button class="pri" onclick="adm('${b.id}',30)">30 días</button><button onclick="adm('${b.id}',0)">Quitar</button><button onclick="admV('${b.id}')">${b.verified?'Sin ✓':'Verificar'}</button><button onclick="susp('${b.id}')">Suspender</button></div>`;
+ const row=b=>`<div class="arow"><div><b style="font-size:14px">${esc(b.name)}${b.verified?' ✓':''}</b><small>${esc(shortLoc(b.loc))} · ${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'Sin destacar'}</small></div><button class="pri" onclick="adm('${b.id}','fin')">Fin de semana</button><button class="pri" onclick="adm('${b.id}',7)">7 días</button><button class="pri" onclick="adm('${b.id}',30)">30 días</button><button onclick="adm('${b.id}',0)">Quitar</button><button onclick="admPlan('${b.id}',1)">Básico 1 mes</button><button onclick="admV('${b.id}')">${b.verified?'Sin ✓':'Verificar'}</button><button onclick="susp('${b.id}')">Suspender</button></div>`;
  const ot=b=>`<div class="arow"><div><b style="font-size:14px">${esc(b.name)}</b><small>${stOf(b)=='rejected'?'Rechazado':'Suspendido'}${b.rejectReason?' · '+esc(b.rejectReason):''}</small></div><button class="pri" onclick="apr('${b.id}')">Aprobar</button></div>`;
  const T=(k,l,n,hot)=>`<button class="admt${tab==k?' on':''}" onclick="admT('${k}')">${l} (${n})${hot&&n?'<i class="dot"></i>':''}</button>`;
  const body=tab=='pend'?(pend.map(req).join('')||'<p class="mu" style="margin:8px 0">No hay comercios pendientes de verificar 🎉</p>'):tab=='ok'?(ok.map(row).join('')||'<p class="mu" style="margin:8px 0">Aún no hay negocios aprobados.</p>'):(oth.map(ot).join('')||'<p class="mu" style="margin:8px 0">No hay rechazados ni suspendidos.</p>');
@@ -571,7 +612,8 @@ window.apr=async bid=>{if(!isAdmin())return;await db.upd('businesses',bid,{statu
 window.rej=async bid=>{if(!isAdmin())return;const r=prompt('Motivo del rechazo (el negocio lo verá):','');if(r===null)return;await db.upd('businesses',bid,{status:'rejected',rejectReason:r||'Revisa tus datos y vuelve a enviar la solicitud.'});await load();render()};
 window.susp=async bid=>{if(!isAdmin()||!confirm('¿Suspender este negocio? Dejará de verse en la app.'))return;await db.upd('businesses',bid,{status:'suspended'});await load();render()};
 window.resub=async bid=>{await db.upd('businesses',bid,{status:'pending',rejectReason:'',submitted:Date.now()});await load();render()};
-window.adm=async(bid,d)=>{if(!isAdmin())return;const b=bzA(bid),u=d?Math.max(Date.now(),b.featuredUntil||0)+d*864e5:0;await db.upd('businesses',bid,{featuredUntil:u});await load();render()};
+window.admPlan=async(bid,m)=>{if(!isAdmin())return;const b=bzA(bid),u=m?Math.max(Date.now(),b.planUntil||0)+m*30*864e5:0;await db.upd('businesses',bid,{plan:m?'basic':'free',planUntil:u});await load();render()};
+window.adm=async(bid,d)=>{if(!isAdmin())return;const b=bzA(bid),u=d=='fin'?Math.max(b.featuredUntil||0,weekendEnd()):d?Math.max(Date.now(),b.featuredUntil||0)+d*864e5:0;await db.upd('businesses',bid,{featuredUntil:u});await load();render()};
 window.admVer=async()=>{if(!isAdmin())return;await db.set('config','app',{v:VERSION});alert('Versión '+VERSION+' marcada. Quienes tengan una anterior verán el aviso para actualizar.')};
 window.admV=async bid=>{if(!isAdmin())return;const b=bzA(bid);await db.upd('businesses',bid,{verified:!b.verified});await load();render()};
 window.loadStats=async bid=>{let E=[];try{E=await db.where('events','bid',bid)}catch(e){}const w=Date.now()-7*864e5,c=t=>E.filter(x=>x.type==t&&x.ts>w).length,el=$('stats');if(!el)return;const bs=el.querySelectorAll('b');bs[0].textContent=c('pv');bs[1].textContent=c('wa')};
