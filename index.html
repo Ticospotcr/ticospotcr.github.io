@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#14306B"><meta name="description" content="Descubre, sigue y contacta negocios ticos cerca de ti."><meta property="og:title" content="AnunciateCR"><meta property="og:description" content="Descubre, sigue y contacta negocios ticos cerca de ti.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Crect%20width%3D%2724%27%20height%3D%2724%27%20rx%3D%276%27%20fill%3D%27%2314306B%27/%3E%3Cpath%20d%3D%27M5%2011v2a1%201%200%200%200%201%201h2l4%203.5V6.5L8%2010H6a1%201%200%200%200-1%201z%27%20fill%3D%27%23fff%27/%3E%3Cpath%20d%3D%27M15.5%209a4%204%200%200%201%200%206%27%20stroke%3D%27%23D9480F%27%20stroke-width%3D%271.8%27%20fill%3D%27none%27%20stroke-linecap%3D%27round%27/%3E%3C/svg%3E">
-<title>AnunciateCR 🇨🇷</title>
+<title>AnunciateCR 🇨🇷 Negocios ticos cerca de ti</title>
+<link rel="canonical" href="https://anunciatecr.github.io/">
+<meta property="og:url" content="https://anunciatecr.github.io/"><meta property="og:type" content="website"><meta property="og:locale" content="es_CR"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"AnunciateCR","url":"https://anunciatecr.github.io/","description":"Descubre, sigue y contacta negocios ticos cerca de ti.","inLanguage":"es-CR"}</script>
 <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js">
 <link rel="modulepreload" href="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-lite.js">
@@ -215,6 +218,7 @@ nav a{position:relative}.nb{position:absolute;top:-4px;left:calc(50% + 6px);min-
 <header><div class="logo" role="button" tabindex="0" style="cursor:pointer" aria-label="Ir a la página principal" onclick="go('inicio')" onkeydown="if(event.key==='Enter')go('inicio')"><div class="lg"><svg viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 8.5a4.5 4.5 0 0 1 0 7M18 6a8 8 0 0 1 0 12"/></svg>AnunciateCR<span class="flg"><b style="background:#14306B"></b><b style="background:#fff"></b><b style="background:#C8102E;flex:2"></b><b style="background:#fff"></b><b style="background:#14306B"></b></span></div><small>Apoya lo nuestro<i></i></small></div><div class="hi"><button class="ib" aria-label="Avisos" onclick="alert('Pronto: avisos de los negocios que sigues')"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><b class="dot"></b></button><button class="ib" id="hb" aria-label="Mi cuenta" onclick="go('perfil')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button></div></header>
 <div id="upd" hidden><span>Hay una versión nueva de AnunciateCR</span><button onclick="location.href=location.pathname+'?v='+Date.now()">Actualizar</button></div>
 <main class="w" id="app"><div class="skl"><i></i><div><s style="width:60%"></s><s style="width:85%"></s><s style="width:40%"></s></div></div><div class="skl"><i></i><div><s style="width:50%"></s><s style="width:80%"></s><s style="width:35%"></s></div></div><div class="skl"><i></i><div><s style="width:65%"></s><s style="width:75%"></s><s style="width:45%"></s></div></div></main>
+<section id="about" class="w" style="padding-bottom:110px;color:var(--mu);font-size:12px;line-height:1.5"><h2 style="font-size:14px;margin:18px 0 6px">AnunciateCR: negocios ticos cerca de ti</h2><p>AnunciateCR es la red de negocios locales de Costa Rica. Descubre comida, barberías, uñas, mecánicos, ropa, hogar, tecnología, automóviles, mascotas, belleza y servicios; sigue a tus negocios favoritos, mira sus novedades y videos cortos, y consulta reseñas de otros clientes. ¿Tienes un emprendimiento? Regístralo gratis y comparte tus ofertas con tus seguidores.</p><noscript><p><b>Activa JavaScript para ver los negocios y publicaciones de AnunciateCR.</b></p></noscript></section>
 <nav id="nav"></nav>
 <div id="shorts" hidden></div>
 <div id="cback" hidden onclick="closeC()"></div><div id="csheet" hidden></div>
@@ -242,7 +246,7 @@ const DEMO=!FIREBASE_CONFIG.projectId;
 const ADMINS=['adminanunciatecr@gmail.com']; /* escribe aquí tu correo entre comillas, ej. ['tucorreo@gmail.com'], para ver los botones de Destacar y Verificar */
 const ADMIN_WA='50686214324'; /* tu WhatsApp con código, ej. '50688888888', para el botón "Tu negocio aquí" */
 const LIM={seg:15,mb:30,dias:7};
-const VERSION='2026-10-12.1'; /* súbela cada vez que publiques cambios importantes; ver panel de administración */
+const VERSION='2026-10-14.1'; /* súbela cada vez que publiques cambios importantes; ver panel de administración */
 let vchk=false; /* límites: segundos por video, MB por video, días que dura una publicación */
 const cloudUp=(f,onp)=>new Promise((res,rej)=>{const x=new XMLHttpRequest(),d=new FormData();d.append('file',f);d.append('upload_preset',CLOUD.preset);
  x.open('POST',`https://api.cloudinary.com/v1_1/${CLOUD.cloud}/video/upload`);
@@ -323,7 +327,8 @@ async function load(){
  lastLoad=Date.now();if(!vchk){vchk=true;db.get('config','app').then(c=>{if(c&&c.v&&c.v!==VERSION)$('upd').hidden=false}).catch(()=>{})}if(!DEMO)S('cache',{biz:biz.map(b=>({...b,photo:(b.photo&&b.photo.length<15000)?b.photo:''})),posts:posts.map(p=>({...p,img:''})),ratings});
  $('hb').title=me?'Mi cuenta':'Iniciar sesión';
 }
-window.go=async(v,a)=>{view=v;arg=a;editing=false;if(v=='negocio'||v=='perfil')ptab='pub';try{if(db&&(v=='inicio'||v=='siguiendo'||v=='negocio')&&Date.now()-lastLoad>20000)await load()}catch(e){console.error('load',e)}try{render()}catch(e){console.error('render',e)}scrollTo(0,0)};
+window.go=async(v,a,np)=>{view=v;arg=a;editing=false;if(!np){const h=hashOf(v,a);try{if(location.hash!=h&&!(h=='#/'&&!location.hash))history.pushState(null,'',h)}catch(e){}}if(v=='negocio'||v=='perfil')ptab='pub';try{if(db&&(v=='inicio'||v=='siguiendo'||v=='negocio')&&Date.now()-lastLoad>20000)await load()}catch(e){console.error('load',e)}try{render()}catch(e){console.error('render',e)}scrollTo(0,0)};
+addEventListener('popstate',()=>{const [v,a]=fromHash();go(v,a,true)});
 function navr(){
  const I={inicio:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',buscar:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',siguiendo:'<path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/>',perfil:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>'};
  const t=(k,l,g=k)=>`<a class="${view==k?'on':''}" data-g="${g}" role="button" onclick="go('${g}')"><svg viewBox="0 0 24 24">${I[k]}</svg>${l}</a>`;
@@ -343,10 +348,10 @@ function bizView(b,own){
   :ptab=='res'?`<div class="card">${own?'':`<div class="mu">${myr?'Tu calificación:':'1) Elige tus estrellas:'}</div>${star}<textarea id="rt" rows="2" maxlength="400" placeholder="2) Cuenta tu experiencia"></textarea><button class="btn" onclick="sendR('${b.id}')">Publicar reseña</button>`}<div id="rvl"></div></div>`
   :(posts.filter(p=>p.bid==b.id).map(postCard).join('')||'<p class="mu">Aún sin publicaciones.</p>');
  const tab=(k,ic,l)=>`<div class="ptab ${ptab==k?'on':''}" onclick="setT('${k}')">${({'⭐':I('star'),'📝':I('note'),'📦':I('box')})[ic]||ic} ${l}</div>`;
- const maps=`<a class="btn o" target="_blank" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(b.name+' '+b.loc+' Costa Rica')}">${I('map')} Cómo llegar</a>`;
+ const maps=`<a class="btn o" target="_blank" rel="noopener" href="${esc(mapsUrl(b))}">${I('map')} Cómo llegar</a><button class="btn o" onclick="shareBiz('${b.id}')">Compartir</button>`;
  const acts=own?`<button class="btn" onclick="go('publicar')">${I('plus')} Publicar</button><button class="btn o" onclick="setEdit('toggle')">${I('edit')} Editar perfil</button><label class="btn o">${I('camera')} Cambiar foto<input id="ph" type="file" accept="image/*" hidden></label>${maps}`:`<button class="btn" id="fb">${fl?'✓ Siguiendo':'+ Seguir'}</button>${maps}`;
  const socs=(b.fb||b.ig)?`<div class="socs">${b.fb?`<a class="sp fb" target="_blank" rel="noopener" href="${esc(fbUrl(b.fb))}">${SFB} Facebook</a>`:''}${b.ig?`<a class="sp ig" target="_blank" rel="noopener" href="${esc(igUrl(b.ig))}">${SIG} Instagram</a>`:''}</div>`:'';
- const edit=own&&editing?`<div class="card" style="margin-top:12px"><b>Editar mi negocio</b><input id="e_n" value="${esc(b.name)}" placeholder="Nombre del negocio" style="margin-top:8px"><select id="e_c">${CATS.map(c=>`<option ${c[1]==b.cat?'selected':''}>${c[1]}</option>`).join('')}</select><textarea id="e_d" rows="3" placeholder="Descripción">${esc(b.desc||'')}</textarea><input id="e_l" value="${esc(b.loc||'')}" placeholder="Ubicación: Cantón, Distrito y señas"><input id="e_h" value="${esc(b.hours||'')}" placeholder="Horario (ej. 8:00 a.m. - 7:00 p.m.)"><input id="e_w" value="${esc(b.wa||'')}" placeholder="WhatsApp con código (50688888888)"><input id="e_fb" value="${esc(b.fb||'')}" placeholder="Facebook (enlace o nombre)"><input id="e_ig" value="${esc(b.ig||'')}" placeholder="Instagram (@usuario)"><div class="acts"><button class="btn" id="e_ok">Guardar cambios</button><button class="btn o" onclick="setEdit(false)">Cancelar</button></div></div>`:'';
+ const edit=own&&editing?`<div class="card" style="margin-top:12px"><b>Editar mi negocio</b><input id="e_n" value="${esc(b.name)}" placeholder="Nombre del negocio" style="margin-top:8px"><select id="e_c">${CATS.map(c=>`<option ${c[1]==b.cat?'selected':''}>${c[1]}</option>`).join('')}</select><textarea id="e_d" rows="3" placeholder="Descripción">${esc(b.desc||'')}</textarea><input id="e_l" value="${esc(b.loc||'')}" placeholder="Ubicación: Cantón, Distrito y señas"><input id="e_m" value="${esc(b.maps||'')}" placeholder="Enlace de Google Maps (opcional)" inputmode="url"><input id="e_h" value="${esc(b.hours||'')}" placeholder="Horario (ej. 8:00 a.m. - 7:00 p.m.)"><input id="e_w" value="${esc(b.wa||'')}" placeholder="WhatsApp con código (50688888888)"><input id="e_fb" value="${esc(b.fb||'')}" placeholder="Facebook (enlace o nombre)"><input id="e_ig" value="${esc(b.ig||'')}" placeholder="Instagram (@usuario)"><div class="acts"><button class="btn" id="e_ok">Guardar cambios</button><button class="btn o" onclick="setEdit(false)">Cancelar</button></div></div>`:'';
  return`<div style="display:flex;gap:14px;align-items:center;margin-top:14px"><div class="av">${avt(b)}</div><div><h1 style="margin:0;font-size:24px">${esc(b.name)}${b.verified?'<span class="vf">✔</span>':''}</h1><div class="mu">${esc(b.cat)} · ★ ${stars(b)} · ${I('users')} ${b.followers||0} seguidores</div></div></div>
  <p>${esc(b.desc)}</p><div class="mu">${I('pin')} ${esc(b.loc)}<br>${I('clock')} ${esc(b.hours||'—')}</div>${edit}${own?`<div class="card" style="margin-top:12px"><b>Resultados · últimos 7 días</b><div class="stats" id="stats"><div><b>…</b><small>Visitas al perfil</small></div><div><b>…</b><small>Toques a WhatsApp</small></div><div><b>${b.followers||0}</b><small>Seguidores</small></div><div><b>${posts.filter(p=>p.bid==b.id).length}</b><small>Publicaciones activas</small></div></div><p class="mu" style="margin:8px 0 0">${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'¿Quieres más clientes? Pide que destaquen tu negocio.'}</p></div>`:''}${isAdmin()?adminH(b):''}
  <div class="acts2">${acts}</div>${socs}
@@ -356,7 +361,8 @@ function bizWire(b,own){
  loadR(b.id);if(!own)trackView(b);
  if(own){loadStats(b.id);const ph=$('ph');if(ph)ph.onchange=async e=>{const f=e.target.files[0];if(!f)return;await db.upd('businesses',b.id,{photo:await shrink(f,320)});await load();render()};
   const ok=$('e_ok');if(ok)ok.onclick=async()=>{const n=$('e_n').value.trim();if(!n)return alert('Falta el nombre');
-   await db.upd('businesses',b.id,{name:n,cat:$('e_c').value,desc:$('e_d').value,loc:$('e_l').value.trim(),hours:$('e_h').value.trim(),wa:$('e_w').value.replace(/\D/g,''),fb:$('e_fb').value.trim(),ig:$('e_ig').value.trim()});
+   const em=$('e_m').value.trim();if(em&&!mapsOk(em))return alert('El enlace debe ser de Google Maps (ej. https://maps.app.goo.gl/...)');
+   await db.upd('businesses',b.id,{name:n,cat:$('e_c').value,desc:$('e_d').value,loc:$('e_l').value.trim(),maps:em,hours:$('e_h').value.trim(),wa:$('e_w').value.replace(/\D/g,''),fb:$('e_fb').value.trim(),ig:$('e_ig').value.trim()});
    editing=false;await load();render()};return}
  const f=$('fb');if(f)f.onclick=async()=>{
   if(!me){alert('Inicia sesión para seguir negocios');return go('perfil')}
@@ -376,15 +382,18 @@ function autoCar(){clearInterval(carT);const r=document.querySelector('.fr');
   if(r.scrollLeft+r.clientWidth>=r.scrollWidth-6)r.scrollTo({left:0,behavior:'smooth'});else r.scrollBy({left:w,behavior:'smooth'})},AUTO_MS)}
 function render(){render0();autoplay();autoCar()}
 function render0(){
+ if(view!='negocio')document.title='AnunciateCR 🇨🇷 Negocios ticos cerca de ti';
  navr();const A=$('app');A.className='w'+((view=='inicio'||view=='siguiendo')?'':' narrow');
  if(view=='inicio'){
   const old=[...document.querySelectorAll('.row.cats')].map(r=>r.scrollLeft);
   const m=b=>(b.name+b.cat+b.loc+b.desc).toLowerCase().includes(q.toLowerCase());
   const fc=biz.filter(b=>(cat=='Todos'||b.cat==cat)&&m(b)),f=biz.filter(b=>(cat2=='Todos'||b.cat==cat2)&&m(b)&&(!zona||b.loc.toLowerCase().includes(zona.toLowerCase())));
   const fp=posts.filter(p=>fc.some(b=>b.id==p.bid)),V=vids().filter(p=>fc.some(b=>b.id==p.bid));
-  const FT=biz.filter(isFeat).sort((a,b)=>rtg(b)-rtg(a)).slice(0,5);
+  const paid=biz.filter(isFeat).sort((a,b)=>rk(a.id)-rk(b.id)).slice(0,8);
+  const fill=biz.filter(b=>!isFeat(b)&&(b.photo||posts.some(p=>p.bid==b.id&&p.img))).sort((a,b)=>(rtg(b)-rtg(a))||(rk(a.id)-rk(b.id))).slice(0,Math.max(0,6-paid.length));
+  const FT=[...paid,...fill];
   const list=f.slice().sort((a,b)=>(isFeat(b)-isFeat(a))||(rtg(b)-rtg(a)));
-  const promo=`<div class="promo" onclick="${ADMIN_WA?`window.open('https://wa.me/${ADMIN_WA}?text='+encodeURIComponent('Hola, quiero destacar mi negocio en AnunciateCR'),'_blank')`:`go('perfil')`}">${I('flame')}<b>Tu negocio aquí</b><p>Destácate y consigue más clientes en tu zona.</p></div>`;
+  const promo=`<div class="promo" onclick="${ADMIN_WA?`window.open('https://wa.me/${ADMIN_WA}?text='+encodeURIComponent('Hola, quiero destacar mi negocio'+(me&&allBiz.find(x=>x.owner==me.uid)?' '+allBiz.find(x=>x.owner==me.uid).name:'')+' en AnunciateCR'),'_blank')`:`go('perfil')`}">${I('flame')}<b>Tu negocio aquí</b><p>Destácate y consigue más clientes en tu zona.</p><p style=\"margin-top:6px;font-weight:700;color:var(--or)\">7 días ${PRECIOS.destacado7} · 30 días ${PRECIOS.destacado30}</p></div>`;
   A.innerHTML=`<div class="hero fade">${SHOPS}${zona?`<span class="loc" onclick="setZona()">${I('pin')} ${esc(zona)}</span>`:''}<h1>Descubre negocios<br>cerca de ti.</h1><p class="s">Sigue y conoce lo que los negocios ticos publican.</p><button class="cta" onclick="document.getElementById('neg').scrollIntoView({behavior:'smooth'})">Explorar negocios ${I('arrow')}</button></div>
   <div class="sb">${I('search')}<input id="q" placeholder="Buscar negocio o ubicación" value="${esc(q)}"><span class="tg" onclick="setZona()">${I('target')}</span></div>
   <div class="row cats">${['Todos',...CATS.map(c=>c[1])].map(c=>chipH(c,c==cat,'setCat',false)).join('')}</div>
@@ -399,7 +408,7 @@ function render0(){
  }
  else if(view=='negocio'){
   const b=bz(arg);if(!b){A.innerHTML='<p>No encontrado</p>';return}
-  const own=!!(me&&b.owner==me.uid);A.innerHTML=bizView(b,own);bizWire(b,own);
+  const own=!!(me&&b.owner==me.uid);document.title=b.name+' · AnunciateCR';A.innerHTML=bizView(b,own);bizWire(b,own);
  }
  else if(view=='siguiendo'){
   if(!me){A.innerHTML=`<h1>❤️ Guardados</h1><p class="s">Inicia sesión para ver las novedades de los negocios que sigues.</p><button class="btn" onclick="go('perfil')">Iniciar sesión</button>`;return}
@@ -430,10 +439,18 @@ function render0(){
   if(!me){A.innerHTML=`<h1>Publicar</h1><p class="s">Inicia sesión para registrar tu negocio.</p><button class="btn" onclick="go('perfil')">Iniciar sesión</button>`;return}
   const mine=allBiz.find(b=>b.owner==me.uid);
   if(!mine){
-   A.innerHTML=`<h1>Registra tu negocio</h1><p class="s">Revisamos cada solicitud antes de publicarla. Completa bien tus datos y agrega foto y redes.</p><input id="n" placeholder="Nombre del negocio"><select id="c">${CATS.map(c=>`<option>${c[1]}</option>`).join('')}</select>
-   <textarea id="d" rows="3" placeholder="Descripción"></textarea><input id="l" placeholder="Ubicación: Cantón, Distrito y señas (ej. Pococí, Guápiles, frente a...)"><input id="h" placeholder="Horario"><input id="w" placeholder="WhatsApp con código (50688888888)"><input id="fbk" placeholder="Facebook (enlace o nombre de la página)"><input id="igr" placeholder="Instagram (@usuario)"><button class="btn" id="sv">Crear negocio</button>`;
+   A.innerHTML=`<h1>Registra tu negocio</h1><p class="s">Revisamos cada solicitud antes de publicarla. Completa bien tus datos y agrega foto y redes.</p>
+   <div style="display:flex;align-items:center;gap:14px;margin:12px 0"><div id="rp" class="av" style="width:84px;height:84px;flex:none"><span class="ini">📷</span></div><div><label class="btn o" style="display:inline-flex;cursor:pointer">${I('camera')} Subir foto o logo<input id="rf" type="file" accept="image/*" hidden></label><p class="mu" style="margin:6px 0 0;font-size:12px">Se verá en tu perfil y en Destacados.</p></div></div>
+   <input id="n" placeholder="Nombre del negocio"><select id="c">${CATS.map(c=>`<option>${c[1]}</option>`).join('')}</select>
+   <textarea id="d" rows="3" placeholder="Descripción"></textarea>
+   <input id="l" placeholder="Dirección escrita: Provincia, Cantón, Distrito y señas (ej. Limón, Pococí, Guápiles, 200 m norte de...)">
+   <input id="gm" placeholder="Enlace de Google Maps (opcional)" inputmode="url"><p class="mu" style="margin:-4px 0 8px;font-size:12px">En Google Maps busca tu negocio → toca <b>Compartir</b> → <b>Copiar enlace</b> y pégalo aquí.</p>
+   <input id="h" placeholder="Horario"><input id="w" placeholder="WhatsApp con código (50688888888)"><input id="fbk" placeholder="Facebook (enlace o nombre de la página)"><input id="igr" placeholder="Instagram (@usuario)"><button class="btn" id="sv">Crear negocio</button>`;
+   let regPhoto='';$('rf').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{regPhoto=await shrink(f,320);$('rp').innerHTML=`<img src="${regPhoto}" alt="">`}catch(x){alert('No se pudo cargar la foto, intenta con otra imagen')}};
    $('sv').onclick=async()=>{const n=$('n').value.trim();if(!n)return alert('Falta el nombre');
-    await db.add('businesses',{name:n,cat:$('c').value,desc:$('d').value,loc:$('l').value,hours:$('h').value,wa:$('w').value.replace(/\D/g,''),fb:$('fbk').value.trim(),ig:$('igr').value.trim(),rating:0,followers:0,created:Date.now(),submitted:Date.now(),status:'pending',owner:me.uid,email:me.email||''});notifyAdmin({name:n,cat:$('c').value,desc:$('d').value,loc:$('l').value,hours:$('h').value,wa:$('w').value.replace(/\D/g,''),fb:$('fbk').value.trim(),ig:$('igr').value.trim(),email:me.email||''});await load();render()};
+    const gm=$('gm').value.trim();if(gm&&!mapsOk(gm))return alert('El enlace debe ser de Google Maps (ej. https://maps.app.goo.gl/...). Déjalo vacío si no lo tienes.');
+    const sv=$('sv');sv.disabled=true;sv.textContent='Enviando...';
+    try{await db.add('businesses',{name:n,cat:$('c').value,desc:$('d').value,loc:$('l').value,maps:gm,photo:regPhoto,hours:$('h').value,wa:$('w').value.replace(/\D/g,''),fb:$('fbk').value.trim(),ig:$('igr').value.trim(),rating:0,followers:0,created:Date.now(),submitted:Date.now(),status:'pending',owner:me.uid,email:me.email||''});notifyAdmin({name:n,cat:$('c').value,desc:$('d').value,loc:$('l').value,maps:gm,hours:$('h').value,wa:$('w').value.replace(/\D/g,''),fb:$('fbk').value.trim(),ig:$('igr').value.trim(),email:me.email||''});await load();render()}catch(e){alert('No se pudo enviar: '+e.message);sv.disabled=false;sv.textContent='Crear negocio'}};
   }else if(stOf(mine)!='approved'){A.innerHTML=statusH(mine)
   }else{
    A.innerHTML=`<h1>Publicar como ${esc(mine.name)}</h1><p class="s">Comparte un estado u oferta con tus seguidores.</p>
@@ -497,7 +514,7 @@ const NOTIFY_EMAIL='adminanunciatecr@gmail.com';
 const CALLMEBOT_PHONE='50686214324', CALLMEBOT_KEY='';
 const notifyAdmin=b=>{try{
  const txt=`Nuevo comercio por aprobar en AnunciateCR\nNombre: ${b.name}\nCategoría: ${b.cat}\nUbicación: ${b.loc}\nWhatsApp: ${b.wa}\nCorreo: ${b.email}`;
- if(NOTIFY_EMAIL)fetch('https://formsubmit.co/ajax/'+NOTIFY_EMAIL,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'Nuevo comercio por aprobar: '+b.name,_template:'table',_captcha:'false',Nombre:b.name,Categoria:b.cat,Descripcion:b.desc,Ubicacion:b.loc,Horario:b.hours,WhatsApp:b.wa,Facebook:b.fb,Instagram:b.ig,Correo_cuenta:b.email})}).catch(()=>{});
+ if(NOTIFY_EMAIL)fetch('https://formsubmit.co/ajax/'+NOTIFY_EMAIL,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'Nuevo comercio por aprobar: '+b.name,_template:'table',_captcha:'false',Nombre:b.name,Categoria:b.cat,Descripcion:b.desc,Ubicacion:b.loc,GoogleMaps:b.maps||'',Horario:b.hours,WhatsApp:b.wa,Facebook:b.fb,Instagram:b.ig,Correo_cuenta:b.email})}).catch(()=>{});
  if(CALLMEBOT_KEY)fetch(`https://api.callmebot.com/whatsapp.php?phone=${CALLMEBOT_PHONE}&text=${encodeURIComponent(txt)}&apikey=${CALLMEBOT_KEY}`,{mode:'no-cors'}).catch(()=>{});
 }catch(e){console.error('notify',e)}};
 const stOf=b=>b.status||'approved';
@@ -512,26 +529,42 @@ window.track=track;
 const trackView=b=>{if(vseen.has(b.id)||(me&&b.owner==me.uid))return;vseen.add(b.id);track('pv',b.id)};
 const emptyH=(t,m,btn)=>`<div class="state empty">${I('store')}<b>${t}</b><p>${m}</p>${btn||''}</div>`;
 const featCard=b=>{const fp=posts.find(p=>p.bid==b.id&&p.img),ph=safeImg((fp&&fp.img)||b.photo||''),k=CC[b.cat]||CC.Todos;
- const bd=[isFeat(b)?`<span class="bd">${I('flame')} Destacado</span>`:'',hasOffer(b)?`<span class="bd g">${I('tag')} Oferta hoy</span>`:'',isNew(b)?`<span class="bd n">${I('spark')} Nuevo</span>`:''].filter(Boolean).slice(0,2).join('');
+ const bd=[isFeat(b)?`<span class="bd">${I('flame')} Destacado</span>`:'',hasOffer(b)?`<span class="bd g">${I('tag')} Oferta hoy</span>`:'',isNew(b)?`<span class="bd n">${I('spark')} Nuevo</span>`:(!isFeat(b)&&rtg(b)>=4?`<span class="bd n">${I('spark')} Popular</span>`:'')].filter(Boolean).slice(0,2).join('');
  return`<div class="fc" onclick="go('negocio','${b.id}')"><div class="ph1" style="${ph?`background-image:url('${ph}')`:`background:${k[1]};color:${k[0]}`}"><div class="bds">${bd}</div>${ph?'':`<svg viewBox="0 0 24 24" class="big">${CI[b.cat]||CI.Todos}</svg>`}</div><div class="fcb"><b>${esc(b.name)}</b><small><span style="color:#f5a300">★</span> ${starsS(b)} · ${esc(shortLoc(b.loc))}</small></div></div>`};
 const adminH=b=>`<div class="card adm" style="margin-top:12px"><b>Panel de administración</b><p class="mu" style="margin:4px 0 8px">${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'No está destacado'}</p><div class="acts"><button class="btn" onclick="adm('${b.id}',7)">Destacar 7 días</button><button class="btn" onclick="adm('${b.id}',30)">30 días</button><button class="btn o" onclick="adm('${b.id}',0)">Quitar</button><button class="btn o" onclick="admV('${b.id}')">${b.verified?'Quitar verificado':'Verificar'}</button><button class="btn o" onclick="admVer()">Marcar versión actual</button></div></div>`;
 const statusH=b=>{const t=stOf(b);
  if(t=='pending')return`<div class="state empty">${I('clock')}<b>Tu solicitud está en revisión</b><p>Revisamos cada negocio antes de publicarlo. Te avisaremos por WhatsApp cuando esté aprobado.</p></div>`;
  if(t=='rejected')return`<div class="state"><b>Tu solicitud necesita cambios</b><p class="mu">${esc(b.rejectReason||'Revisa tus datos y vuelve a enviarla.')}</p><div class="acts"><button class="btn" onclick="go('perfil');setTimeout(()=>setEdit(true),60)">Editar datos</button><button class="btn o" onclick="resub('${b.id}')">Reenviar solicitud</button></div></div>`;
  return`<div class="state empty">${I('store')}<b>Tu negocio está suspendido</b><p>Escríbenos por WhatsApp para revisarlo.</p>${ADMIN_WA?`<a class="cta" style="text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/${ADMIN_WA}">Contactar a AnunciateCR</a>`:''}</div>`};
+
+/* ===== PRECIOS que se muestran en la tarjeta "Tu negocio aquí" (edítalos aquí) ===== */
+const PRECIOS={destacado7:'₡3,500',destacado30:'₡9,900'};
+const mapsOk=u=>/^https:\/\/(www\.)?(google\.[a-z.]+\/maps|maps\.google\.[a-z.]+|maps\.app\.goo\.gl|goo\.gl\/maps)/i.test((u||'').trim());
+const mapsUrl=b=>mapsOk(b.maps)?b.maps.trim():`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((b.name||'')+' '+(b.loc||'')+' Costa Rica')}`;
+const ROT={};const rk=id=>ROT[id]??=Math.random();
+const bizLink=id=>location.origin+location.pathname+'#/negocio/'+id;
+window.shareBiz=async id=>{const b=bz(id)||allBiz.find(x=>x.id==id);if(!b)return;const url=bizLink(id),text=`Mira ${b.name} en AnunciateCR`;
+ try{if(navigator.share){await navigator.share({title:b.name,text,url});return}}catch(e){if(e&&e.name=='AbortError')return}
+ try{await navigator.clipboard.writeText(url);alert('Enlace copiado:\n'+url)}catch(e){prompt('Copia este enlace:',url)}};
+const VIEWS=['inicio','negocio','siguiendo','perfil','publicar'];
+const hashOf=(v,a)=>v=='inicio'?'#/':v=='negocio'?'#/negocio/'+a:'#/'+v;
+const fromHash=()=>{const m=location.hash.match(/^#\/([a-z]+)(?:\/([\w-]+))?/);return m&&VIEWS.includes(m[1])?[m[1],m[2]||null]:['inicio',null]};
+{const [v0,a0]=fromHash();view=v0;arg=a0}
 const fmtD=t=>t?new Date(t).toLocaleString('es-CR',{dateStyle:'medium',timeStyle:'short'}):'—';
 const adminPanel=()=>{const pend=allBiz.filter(b=>stOf(b)=='pending'),ok=allBiz.filter(b=>stOf(b)=='approved'),oth=allBiz.filter(b=>['rejected','suspended'].includes(stOf(b)));
  const tab=admTab||(pend.length?'pend':'ok');
+ const soon=allBiz.filter(b=>isFeat(b)&&b.featuredUntil-Date.now()<=3*864e5).sort((a,b)=>a.featuredUntil-b.featuredUntil);
+ const soonH=soon.length?`<div class="msg"><b>⏰ Destacados por vencer (${soon.length})</b>${soon.map(b=>`<div style="margin-top:6px">${esc(b.name)} · vence ${new Date(b.featuredUntil).toLocaleDateString('es-CR')}${b.wa?` · <a target="_blank" rel="noopener" href="${waLink(b,'Hola '+b.name+', tu destacado en AnunciateCR está por vencer. ¿Quieres renovarlo?')}">Avisar por WhatsApp</a>`:''}</div>`).join('')}</div>`:'';
  const F=(k,v)=>`<small><b>${k}:</b> ${v||'—'}</small>`;
  const req=b=>{const im=safeImg(b.photo||'');return`<div class="arow" style="display:block;padding:12px 0"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px">${im?`<img src="${im}" alt="" style="width:64px;height:64px;border-radius:12px;object-fit:cover;flex:none">`:`<div style="width:64px;height:64px;border-radius:12px;background:var(--bd);display:grid;place-items:center;flex:none;font-size:11px;color:var(--mu)">sin foto</div>`}<div style="min-width:0"><b style="font-size:15px">${esc(b.name)}</b><small>Enviado: ${fmtD(b.submitted||b.created)}</small></div></div>
-  ${F('Categoría',esc(b.cat))}${F('Descripción',esc(b.desc))}${F('Ubicación',esc(b.loc))}${F('Horario',esc(b.hours))}${F('WhatsApp',b.wa?esc(b.wa):'')}${F('Facebook',b.fb?`<a target="_blank" rel="noopener" href="${esc(fbUrl(b.fb))}">${esc(b.fb)}</a>`:'')}${F('Instagram',b.ig?`<a target="_blank" rel="noopener" href="${esc(igUrl(b.ig))}">${esc(b.ig)}</a>`:'')}${F('Correo de la cuenta',esc(b.email))}
+  ${F('Categoría',esc(b.cat))}${F('Descripción',esc(b.desc))}${F('Dirección',esc(b.loc))}${F('Google Maps',b.maps&&mapsOk(b.maps)?`<a target="_blank" rel="noopener" href="${esc(b.maps)}">Abrir mapa</a>`:'')}${F('Horario',esc(b.hours))}${F('WhatsApp',b.wa?esc(b.wa):'')}${F('Facebook',b.fb?`<a target="_blank" rel="noopener" href="${esc(fbUrl(b.fb))}">${esc(b.fb)}</a>`:'')}${F('Instagram',b.ig?`<a target="_blank" rel="noopener" href="${esc(igUrl(b.ig))}">${esc(b.ig)}</a>`:'')}${F('Correo de la cuenta',esc(b.email))}
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><button class="pri" onclick="apr('${b.id}')">✓ Aprobar</button><button onclick="rej('${b.id}')">Rechazar</button>${b.wa?`<a class="sp" target="_blank" rel="noopener" href="${waLink(b,`Hola ${b.name}, te escribimos de AnunciateCR sobre tu solicitud de inscripción.`)}">${WA_SVG} Escribir</a>`:''}</div></div>`};
  const row=b=>`<div class="arow"><div><b style="font-size:14px">${esc(b.name)}${b.verified?' ✓':''}</b><small>${esc(shortLoc(b.loc))} · ${isFeat(b)?'Destacado hasta '+new Date(b.featuredUntil).toLocaleDateString('es-CR'):'Sin destacar'}</small></div><button class="pri" onclick="adm('${b.id}',7)">7 días</button><button class="pri" onclick="adm('${b.id}',30)">30 días</button><button onclick="adm('${b.id}',0)">Quitar</button><button onclick="admV('${b.id}')">${b.verified?'Sin ✓':'Verificar'}</button><button onclick="susp('${b.id}')">Suspender</button></div>`;
  const ot=b=>`<div class="arow"><div><b style="font-size:14px">${esc(b.name)}</b><small>${stOf(b)=='rejected'?'Rechazado':'Suspendido'}${b.rejectReason?' · '+esc(b.rejectReason):''}</small></div><button class="pri" onclick="apr('${b.id}')">Aprobar</button></div>`;
  const T=(k,l,n,hot)=>`<button class="admt${tab==k?' on':''}" onclick="admT('${k}')">${l} (${n})${hot&&n?'<i class="dot"></i>':''}</button>`;
  const body=tab=='pend'?(pend.map(req).join('')||'<p class="mu" style="margin:8px 0">No hay comercios pendientes de verificar 🎉</p>'):tab=='ok'?(ok.map(row).join('')||'<p class="mu" style="margin:8px 0">Aún no hay negocios aprobados.</p>'):(oth.map(ot).join('')||'<p class="mu" style="margin:8px 0">No hay rechazados ni suspendidos.</p>');
  return`<div class="card adm" style="margin-top:12px"><b>Administración</b><p class="mu" style="margin:4px 0 8px">${ok.length} aprobados · ${pend.length} pendientes · ${ok.filter(isFeat).length} destacados</p>
- <div class="admtabs">${T('pend','Por verificar',pend.length,true)}${T('ok','Aprobados',ok.length)}${T('oth','Rechazados',oth.length)}</div>${body}
+ ${soonH}<div class="admtabs">${T('pend','Por verificar',pend.length,true)}${T('ok','Aprobados',ok.length)}${T('oth','Rechazados',oth.length)}</div>${body}
  <div class="acts" style="margin-top:10px"><button class="btn o" onclick="admVer()">Marcar versión actual</button></div></div>`};
 window.admT=t=>{admTab=t;render()};
 window.apr=async bid=>{if(!isAdmin())return;await db.upd('businesses',bid,{status:'approved',approvedAt:Date.now(),rejectReason:''});await load();render()};
